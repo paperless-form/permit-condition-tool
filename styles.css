@@ -1,0 +1,206 @@
+body {
+    background-color: #1a2332;
+    color: white;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Main Heading */
+.main-heading {
+    font-size: 24px;
+    margin-bottom: 30px;
+    color: #ff5722;
+    text-align: center;
+}
+
+
+.select2-container--default .select2-selection--single {
+    /* background-color: #0f1724; */
+    border: 1px solid #2a3547;
+    border-radius: 4px;
+    height: 45px;
+    color: white;
+    box-shadow: none;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: #8b95a5;
+    line-height: 45px;
+    padding-left: 15px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 40px;
+    right: 5px;
+}
+
+/* Permissions Section Styling */
+.checkbox-section {
+    margin-top: 20px;
+    background-color: #373f4c;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.checkbox-container {
+    margin: 5px 0;
+}
+
+.checkbox-item {
+    margin: 10px 0;
+}
+
+input[type="checkbox"] {
+    margin-right: 10px;
+    height: 20px;
+    width: 20px;
+}
+
+.checkbox-item label {
+    color: #8b95a5;
+}
+
+.checkbox-text {
+    font-size: 1.3rem;
+    color: #8b95a5;
+}
+
+/* Textarea Styling */
+.textarea-container {
+    margin: 20px 0;
+}
+
+textarea {
+    width: 100%;
+    min-height: 150px;
+    background-color: #0f1724;
+    border: 1px solid #2a3547;
+    color: white;
+    padding: 15px;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+/* Button Styling */
+.button-container {
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.copy-btn,
+.submit-btn,
+.clear-btn {
+    background-color: #ff5722 !important;
+    color: white !important;
+}
+
+.btn:hover {
+    opacity: 0.9;
+    transition: 0.5s;
+    color: white;
+    background-color: #ff5722;
+}
+
+/* Select2 Dropdown Styling */
+.select2-dropdown {
+    /* background-color: #0f1724; */
+    border: 1px solid #2a3547;
+}
+
+.select2-search--dropdown {
+    padding: 8px;
+}
+
+.select2-search--dropdown .select2-search__field {
+    /* background-color: #0f1724; */
+    border: 1px solid #2a3547;
+    color: white;
+    padding: 8px;
+    border-radius: 4px;
+}
+
+.select2-results__option {
+    padding: 8px 15px;
+    color: #8b95a5;
+}
+
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+    background-color: #2a3547;
+    color: white;
+}
+
+.select2-container--default .select2-results__option[aria-selected=true] {
+    background-color: #2a3547;
+}
+
+/* Adjust the select2 container width */
+.select2-container {
+    width: 100% !important;
+    margin-top: 5px !important;
+}
+
+/* Style for the placeholder */
+.select2-container--default .select2-selection--single .select2-selection__placeholder {
+    color: #8b95a5;
+}
+
+/* Arrow color */
+.select2-container--default .select2-selection--single .select2-selection__arrow b {
+    border-color: #8b95a5 transparent transparent transparent;
+}
+
+/* When the dropdown is open, reverse the arrow */
+.select2-container--default.select2-container--open .select2-selection--single .select2-selection__arrow b {
+    border-color: transparent transparent #8b95a5 transparent;
+}
+
+/* Remove white background from select2 choices */
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    background-color: transparent;
+}
+
+/* Add hover effect for dropdown options */
+.select2-container--default .select2-results__option:hover {
+    background-color: #2a3547;
+}
+
+.select2-container .select2-selection--single {
+    height: 42px !important;
+}
+
+.select2-container--classic .select2-selection--single .select2-selection__rendered {
+    color: white;
+    line-height: 42px;
+    /* background-color: #0f1724; */
+}
+
+.select2-container--classic .select2-selection--single .select2-selection__arrow {
+    height: 41px !important;
+}
+
+.select2-container--classic .select2-selection--single .select2-selection__clear {
+    height: 41px;
+}
+
+.select2-results {
+    /* background-color: #0f1724; */
+}
+
+input {
+    color: #8b95a5 !important;
+}
