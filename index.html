@@ -13,6 +13,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"
         rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
 
     <!-- Custom CSS -->
@@ -187,22 +188,37 @@
 
             <div class="search-section mb-3">
                 <label for="">How should the document be prepared?</label>
-                <select class="search-select mt-3 document-prepared" style="width: 100%">
-                    <option value="" selected data-hide=".prepared-section">Select Option</option>
-                    <option value="be prepared to the satisfaction of the responsible authority."
-                        data-hide=".prepared-section">Be prepared to the
-                        satisfaction of the responsible authority.</option>
-                    <option value="be prepared by a suitably qualified person." data-hide=".prepared-section">Be
-                        prepared by a suitably qualified
-                        person.</option>
-                    <option value="be drawn to scale with dimensions." data-hide=".prepared-section">Be drawn to scale
-                        with dimensions.</option>
-                    <option value="be submitted to the responsible authority in electronic form."
-                        data-hide=".prepared-section">Be submitted to the
-                        responsible authority in electronic form.</option>
-                    <option value="be prepared" data-show=".prepared-section">Be prepared</option>
-                </select>
-                <div class="text-danger"></div>
+                <div class="d-flex">
+                    <div class="checkbox-container"><input type="checkbox" class="prepared-checkbox"></div>
+                    <div>
+                        <p class="checkbox-text">Be prepared to the satisfaction of the responsible authority.</p>
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <div class="checkbox-container"><input type="checkbox" class="prepared-checkbox"></div>
+                    <div>
+                        <p class="checkbox-text">Be prepared by a suitably qualified person.</p>
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <div class="checkbox-container"><input type="checkbox" class="prepared-checkbox"></div>
+                    <div>
+                        <p class="checkbox-text">Be drawn to scale with dimensions.</p>
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <div class="checkbox-container"><input type="checkbox" class="prepared-checkbox"></div>
+                    <div>
+                        <p class="checkbox-text">Be submitted to the responsible authority in electronic form.</p>
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <div class="checkbox-container"><input type="checkbox" class="prepared-checkbox"></div>
+                    <div>
+                        <p class="checkbox-text">Be prepared.</p>
+                    </div>
+                </div>
+                <div class="prepared-checkbox-error text-danger"></div>
             </div>
             <div class="prepared-section d-none mb-3">
                 <label for="">Preparation – Custom Other Requirements</label>
@@ -621,8 +637,7 @@
         <!-- Condition 2-->
         <div class="condition-2 d-none mt-3">
             <div class="search-section mb-3">
-                <label for="">What is the name of the plan(s) or document that needs to be
-                    approved?</label>
+                <label for="">What aspect of the use’s operation is the condition regulating?</label>
                 <select class="search-select mt-3 component-select" style="width: 100%">
                     <option data-hide=".specific-aspect" value="" disabled selected>Select Option</option>
                     <option data-hide=".specific-aspect" value="component 1">A condition regulating the general hours of operation for the
@@ -643,14 +658,22 @@
             <div class="search-section mb-3">
                 <label for="">What days of the week do the hours of operation relate to?</label>
                 <select class="search-select mt-3 hours-of-operation-days" style="width: 100%">
-                    <option value="" disabled selected>Select Option</option>
-                    <option value="[from 1 to 12] [am or pm] and [from 1 to 12] [am or pm] Monday to Friday">[from 1 to 12] [am or pm] and [from 1 to 12] [am or pm] Monday to Friday</option>
-                    <option value="[from 1 to 12] [am or pm] and [from 1 to 12] [am or pm] Saturday">[from 1 to 12] [am or pm] and [from 1 to 12] [am or pm] Saturday</option>
-                    <option value="[from 1 to 12] [am or pm] and [from 1 to 12] [am or pm] Sunday or public holiday">[from 1 to 12] [am or pm] and [from 1 to 12] [am or pm] Sunday or public holiday</option>
-
+                    <option value="" disabled selected data-hide=".time-div">Select Option</option>
+                    <option value="Monday to Friday" data-show=".time-div">Monday to Friday</option>
+                    <option value="Saturday" data-show=".time-div">Saturday</option>
+                    <option value="Sunday or public holiday" data-show=".time-div">Sunday or public holiday</option>
                 </select>
                 <div class="text-danger"></div>
             </div>
+            <div class="mb-3 time-div d-none">
+                <label for="">From</label>
+                <input type="text" id="flatpickr-time" class="form-control from-time" placeholder="Select Time">
+            </div>
+            <div class="mb-3 time-div d-none">
+                <label for="">To</label>
+                <input type="text" id="flatpickr-time" class="form-control to-time" placeholder="Select Time">
+            </div>
+
 
             <div class="search-section mb-3">
                 <label for="">Are there activities of the use that may operate outside of these
@@ -710,10 +733,18 @@
         src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <!-- Custom JS -->
     <script src="script.js"></script>
 
     <script>
+        flatpickr("#flatpickr-time", {
+            enableTime: true,
+            noCalendar: true,
+            dateFormat: "h:i K", // AM/PM format
+            time_24hr: false
+        });
+
         var lines = ''
         $(document).ready(function () {
             $('.datepicker').datepicker({
@@ -743,6 +774,16 @@
             }
         });
 
+        $(document).on('change', '.prepared-checkbox', function () {
+
+
+            if ($(this).is(':checked') && $(this).closest('div').parent('div').find('p').text() == "Be prepared.") {
+                $('.prepared-section').removeClass('d-none');
+            } else if ($(this).closest('div').parent('div').find('p').text() == "Be prepared."){
+                $('.prepared-section').addClass('d-none');
+            }
+        });
+
         function validate() {
             var valid = true;
             $('.text-danger').empty();
@@ -758,16 +799,23 @@
 
             // Validate input fields
             $('.form-control:visible').each(function () {
-                var $input = $(this);
-                var $errorDiv = $input.closest('div').find('.text-danger');
-                if (!$input.val().trim()) {
-                    $errorDiv.html('<p>This field is required</p>');
-                    valid = false;
+                if(!$(this).hasClass('specify-requirements')){
+                    var $input = $(this);
+                    var $errorDiv = $input.closest('div').find('.text-danger');
+                    if (!$input.val().trim()) {
+                        $errorDiv.html('<p>This field is required</p>');
+                        valid = false;
+                    }
                 }
             });
 
             if ($('.condition-checkbox:visible').length > 0 && $('.condition-checkbox:checked').length == 0) {
-                $('.condition-checkbox-error').html('<p>This field is required</p>');
+                $('.condition-checkbox-error').html('<p>Check at-least one</p>');
+                valid = false;
+            }
+
+            if ($('.prepared-checkbox:visible').length > 0 && $('.prepared-checkbox:checked').length == 0) {
+                $('.prepared-checkbox-error').html('<p>Check at-least one</p>');
                 valid = false;
             }
 
@@ -811,11 +859,11 @@
         function texareaContent() {
             $('.checkbox-section').removeClass('d-none')
             var content = ''
+            lines = $('.limitedTextarea').val().split("\n");
             if($('.table-1').is(':checked')){
                 var document_title = $('.document-title').find(":selected").text(),
                     document_desc = $('.document-title').find(":selected").val(),
                     event = $('.plan-need-approved').find(":selected").val().trim(),
-                    preparation = $('.document-prepared').find(":selected").val().trim(),
                     document_version = $('.document-version').find(":selected").val().trim(),
                     document_include = [],
                     allow_modify_requirements = $('.allow-modify-requirements').find(":selected").val().trim(),
@@ -866,10 +914,6 @@
                     works_complete_by = "Within " + $('.issued-complete-by-time').val() + " of " + $('.event-complete-by-name').val()
                 }
 
-                if (preparation == "be prepared") {
-                    preparation = $('.document-prepared-other-requirements').val()
-                }
-
                 if (document_version == "The document needs to be generally in accordance with the document forming part of the permit application." || document_version == "The document needs to be generally in accordance with the document forming part of the permit application, but with specified changes.") {
                     document_version = "be generally in accordance with the " + document_title + " forming part of the application."
                 }
@@ -879,18 +923,32 @@
 
                 content += `<div><b>${document_title}</b></div>\n\n`
                 content += `<div>1. ${event}, ${document_desc}</div>\n`
-                content += `<div>&emsp;a) ${preparation}</div>\n`
+                content += `<div>&emsp;a) Document to be prepared: </div>\n`
+
+                var i = 0;
+                $('.prepared-checkbox:checked').each(function(){
+                    if($(this).closest('div').parent('div').find('p').text() == "Be prepared."){
+                        content += `<div>&emsp;&emsp;${toRoman(i + 1)}. ${$('.document-prepared-other-requirements').val()}</div>\n`
+                    }
+                    else{
+                        content += `<div>&emsp;&emsp;${toRoman(i + 1)}. ${$(this).closest('div').parent('div').find('p').text()}</div>\n`
+                    }
+                    i++
+                })
+                
                 content += `<div>&emsp;b) ${document_version}, but modified to show:</div>\n`
                 for (var i = 0; i < lines.length; i++) {
                     content += `<div>&emsp;&emsp;${toRoman(i + 1)}. ${lines[i]}</div>\n` //roman number
                 }
 
-                content += `<div>&emsp;c) Include following details:</div>\n`
+                document_include.length != 0 ? content += `<div>&emsp;c) Include following details:</div>\n` : $('.specify-requirements').val().trim() != '' ? content += `<div>&emsp;c) Include following details:</div>\n` : ''
 
                 for (var i = 0; i < document_include.length; i++) {
                     content += `<div>&emsp;&emsp;${toRoman(i + 1)}. ${document_include[i]}</div>\n`
                 }
-                content += `<div>&emsp;&emsp;${toRoman(i+1)}. ${$('.specify-requirements').val()}</div>\n`
+                if($('.specify-requirements').val().trim() != ''){
+                    content += `<div>&emsp;&emsp;${toRoman(i+1)}. ${$('.specify-requirements').val()}</div>\n`
+                }
                 if(allow_modify_requirements == "Yes") {
                     content += `<div>The responsible authority may consent in writing to vary any of these requirements.</div>\n`
                 }
@@ -923,7 +981,7 @@
                     content += `<div>1. The ${$('.specific-aspect-component').val()} of the use must only operate between the following times:</div>\n`
                 }
 
-                content += `<div>&emsp;a) ${$('.hours-of-operation-days').find(":selected").val()}</div>\n`
+                content += `<div>&emsp;a) ${$('.from-time').val()} to ${$('.to-time').val()} ${$('.hours-of-operation-days').find(":selected").val()}</div>\n`
 
                 if($('.activities-outside-hours').find(":selected").val() == "Yes"){
                     content += `<div>${$('.exempt-activities-input').val()}</div>\n`
@@ -957,6 +1015,7 @@
             $('.copy-permit-condition').html('')
             $('select option[value=""]').prop('selected', true).change()
             $('input[type="text"]').val('')
+            $('.from-time, .to-time').val('')
             $('.condition-checkbox').prop('checked', false)
             $('.condition-1').addClass('d-none')
             $('.condition-2').addClass('d-none')
