@@ -191,31 +191,31 @@
                 <div class="d-flex">
                     <div class="checkbox-container"><input type="checkbox" class="prepared-checkbox"></div>
                     <div>
-                        <p class="checkbox-text">Be prepared to the satisfaction of the responsible authority.</p>
+                        <p class="checkbox-text">be prepared to the satisfaction of the responsible authority</p>
                     </div>
                 </div>
                 <div class="d-flex">
                     <div class="checkbox-container"><input type="checkbox" class="prepared-checkbox"></div>
                     <div>
-                        <p class="checkbox-text">Be prepared by a suitably qualified person.</p>
+                        <p class="checkbox-text">be prepared by a suitably qualified person</p>
                     </div>
                 </div>
                 <div class="d-flex">
                     <div class="checkbox-container"><input type="checkbox" class="prepared-checkbox"></div>
                     <div>
-                        <p class="checkbox-text">Be drawn to scale with dimensions.</p>
+                        <p class="checkbox-text">be drawn to scale with dimensions</p>
                     </div>
                 </div>
                 <div class="d-flex">
                     <div class="checkbox-container"><input type="checkbox" class="prepared-checkbox"></div>
                     <div>
-                        <p class="checkbox-text">Be submitted to the responsible authority in electronic form.</p>
+                        <p class="checkbox-text">be submitted to the responsible authority in electronic form</p>
                     </div>
                 </div>
                 <div class="d-flex">
                     <div class="checkbox-container"><input type="checkbox" class="prepared-checkbox"></div>
                     <div>
-                        <p class="checkbox-text">Be prepared.</p>
+                        <p class="checkbox-text">be prepared.</p>
                     </div>
                 </div>
                 <div class="prepared-checkbox-error text-danger"></div>
@@ -716,7 +716,7 @@
                                     <input type="checkbox" class="time-checkbox">
                                 </div>
                                 <div>
-                                    <p class="checkbox-text mb-0">Sunday or public holiday</p>
+                                    <p class="checkbox-text mb-0">Sunday or public holiday.</p>
                                 </div>
                             </div>
                         </div>
@@ -801,7 +801,8 @@
     <script src="script.js"></script>
 
     <script>
-        var arr =['5','4','3','4','5','4','3','2','4','5','4', '3', '2', '3', '4', '3', '2', '1', '3', '4']
+        var alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'],
+        count = 0;
         flatpickr("#flatpickr-time", {
             enableTime: true,
             noCalendar: true,
@@ -841,9 +842,9 @@
         $(document).on('change', '.prepared-checkbox', function () {
 
 
-            if ($(this).is(':checked') && $(this).closest('div').parent('div').find('p').text() == "Be prepared.") {
+            if ($(this).is(':checked') && $(this).closest('div').parent('div').find('p').text() == "be prepared.") {
                 $('.prepared-section').removeClass('d-none');
-            } else if ($(this).closest('div').parent('div').find('p').text() == "Be prepared."){
+            } else if ($(this).closest('div').parent('div').find('p').text() == "be prepared."){
                 $('.prepared-section').addClass('d-none');
             }
         });
@@ -913,6 +914,7 @@
             if (!validate()) {
                 return false;
             }
+            count = 0
             texareaContent()
         });
 
@@ -993,26 +995,28 @@
 
                 content += `<div><b>${document_title}</b></div>\n\n`
                 content += `<div>1. ${event}, ${document_desc}</div>\n`
-                content += `<div>&emsp;a) Document to be prepared: </div>\n`
 
                 var i = 0;
                 $('.prepared-checkbox:checked').each(function(){
-                    if($(this).closest('div').parent('div').find('p').text() == "Be prepared."){
-                        content += `<div style="display: flex;align-items: baseline;"><div style="white-space: pre;" class="margin-for-roman">&emsp;&emsp;${toRoman(i + 1)}.</div><div style="margin-left: 10px;"> ${$('.document-prepared-other-requirements').val()}</div></div>\n`
+                    if($(this).closest('div').parent('div').find('p').text() == "be prepared."){
+                        content += `<div>&emsp;${alphabet[count]}) ${$('.document-prepared-other-requirements').val()} </div>\n`
+                        count++
                     }
                     else{
-                        content += `<div style="display: flex;align-items: baseline;"><div style="white-space: pre;" class="margin-for-roman">&emsp;&emsp;${toRoman(i + 1)}.</div><div style="margin-left: 10px;"> ${$(this).closest('div').parent('div').find('p').text()}</div></div>\n`
+                        content += `<div>&emsp;${alphabet[count]}) ${$(this).closest('div').parent('div').find('p').text()}</div>\n`
+                        count++
                     }
                     i++
                 })
                 
-                content += `<div>&emsp;b) ${document_version}, but modified to show:</div>\n`
+                content += `<div>&emsp;${alphabet[count]}) ${document_version}, but modified to show:</div>\n`
+                count++
                 for (var i = 0; i < lines.length; i++) {
                     content += `<div style="display: flex;align-items: baseline;"><div style="white-space: pre;" class="margin-for-roman">&emsp;&emsp;${toRoman(i + 1)}.</div><div style="margin-left: 10px;"> ${lines[i]}</div></div>\n` //roman number
                 }
 
-                document_include.length != 0 ? content += `<div>&emsp;c) Include following details:</div>\n` : $('.specify-requirements').val().trim() != '' ? content += `<div>&emsp;c) Include following details:</div>\n` : ''
-
+                document_include.length != 0 ? content += `<div>&emsp;${alphabet[count]}) Include following details:</div>\n` : $('.specify-requirements').val().trim() != '' ? content += `<div>&emsp;${alphabet[count]}) Include following details:</div>\n` : ''
+                count++
                 for (var i = 0; i < document_include.length; i++) {
                     content += `<div style="display: flex;align-items: baseline;"><div style="white-space: pre;" class="margin-for-roman">&emsp;&emsp;${toRoman(i + 1)}.</div><div style="margin-left: 10px;"> ${document_include[i]}</div></div>\n`
                 }
@@ -1032,12 +1036,13 @@
 
                 if(things_to_be_done == "Yes"){
                     content += `\n<div><b>Completion of `+$('.things-to-be-done-required').val()+`</b></div>\n`
-                    content += `<div>2. `+works_complete_by+` the `+$('.things-to-be-done-required').val()+` included in the approved `+document_title+` must be carried out and completed to the satisfaction of the responsible authority.</div>\n`
+                    // content += `<div>2. `+works_complete_by+` the `+$('.things-to-be-done-required').val()+` included in the approved `+document_title+` must be carried out and completed to the satisfaction of the responsible authority.</div>\n`
+                    content += `<div style="display: flex;align-items: baseline;"><div style="white-space: pre;">2. </div><div> `+works_complete_by+` the `+$('.things-to-be-done-required').val()+` included in the approved `+document_title+` must be carried out and completed to the satisfaction of the responsible authority.</div></div>\n`
                 }
 
                 if(document_contain_requirements == "Yes"){
                     content += `\n<div><b>Compliance with document approved under this permit</b></div>\n`
-                    content += things_to_be_done == "Yes" ? `<div>3. At all times what the permit allows must be carried out in accordance with the requirements of any document approved under this permit to the satisfaction of the responsible authority.</div>` : `<div>2. At all times what the permit allows must be carried out in accordance with the requirements of any document approved under this permit to the satisfaction of the responsible authority.</div>` 
+                    content += things_to_be_done == "Yes" ? `<div style="display: flex;align-items: baseline;"><div style="white-space: pre;">3. </div><div> At all times what the permit allows must be carried out in accordance with the requirements of any document approved under this permit to the satisfaction of the responsible authority.</div></div>\n` : `<div style="display: flex;align-items: baseline;"><div style="white-space: pre;">2. </div><div> At all times what the permit allows must be carried out in accordance with the requirements of any document approved under this permit to the satisfaction of the responsible authority.</div></div>\n`
                 }
 
             }
@@ -1059,15 +1064,14 @@
                 var counter = 0, alphabet_counter = '';
                 $('.time-checkbox:checked').each(function(){
                     var row = $(this).closest('div.row');
-                    counter == 0 ? alphabet_counter = 'a)' : counter == 1 ? alphabet_counter = 'b)' : alphabet_counter = 'c)'
-                    content += `<div>&emsp;${alphabet_counter} ${row.find('.from-time').val()} to ${row.find('.to-time').val()} ${row.find('p').text()}</div>\n`
-                    counter++
+                    content += `<div>&emsp;${alphabet[count]}) ${row.find('.from-time').val()} to ${row.find('.to-time').val()} ${row.find('p').text()}</div>\n`
+                    count++
                 });
 
                 // content += `<div>&emsp;a) ${$('.from-time').val()} to ${$('.to-time').val()} ${$('.hours-of-operation-days').find(":selected").val()}</div>\n`
 
                 if($('.activities-outside-hours').find(":selected").val() == "Yes"){
-                    content += `<div>${$('.exempt-activities-input').val()}</div>\n`
+                    content += `<div>${capitalizeFirstLetter($('.exempt-activities-input').val())} may occur outside of the times specified above.</div>\n`
                 }
 
                 if($('.responsible-authority-consent').find(":selected").val() == "Yes"){
@@ -1082,7 +1086,7 @@
         function copyDivContent() {
             const textToCopy = $('.copy-permit-condition').text(); 
 
-navigator.clipboard.writeText(textToCopy)
+            navigator.clipboard.writeText(textToCopy)
 
                 .then(() => {
                     console.log("Text copied to clipboard:", textToCopy);
@@ -1094,6 +1098,10 @@ navigator.clipboard.writeText(textToCopy)
                 });
         }
 
+        function capitalizeFirstLetter(str) {
+            return str.charAt(0).toUpperCase() + str.slice(1);
+        }
+
         $(document).on('click', '.clear-btn', function () {
             $('.checkbox-section').addClass('d-none')
             $('.copy-permit-condition').html('')
@@ -1103,6 +1111,7 @@ navigator.clipboard.writeText(textToCopy)
             $('.condition-checkbox, .prepared-checkbox').prop('checked', false)
             $('.condition-1').addClass('d-none')
             $('.condition-2').addClass('d-none')
+            $('.time-checkbox').prop('checked', false)
             $('.limitedTextarea, .specify-requirements').val('')
         })
 
