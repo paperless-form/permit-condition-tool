@@ -234,21 +234,21 @@
                     document?</label>
                 <select class="no-search-select  mt-3 document-version" style="width: 100%">
                     <option value="" selected data-hide=".other-doc, .specify-div">Select Option</option>
-                    <option data-hide=".other-doc, .specify-div" value="No, it is a new document">No, it
+                    <option data-hide=".other-doc, .specify-div, .document-include-table" value="No, it is a new document">No, it
                         is a new document</option>
-                    <option data-hide=".other-doc, .specify-div"
+                    <option data-hide=".other-doc, .specify-div" data-show=".document-include-table"
                         value="The document needs to be generally in accordance with the document forming part of the permit application.">
                         The document needs to be generally in
                         accordance with the document forming part of the permit application.
                     </option>
-                    <option data-hide=".other-doc" data-show=".specify-div" 
+                    <option data-hide=".other-doc" data-show=".specify-div, .document-include-table" 
                         value="The document needs to be generally in accordance with the document forming part of the permit application, but with specified changes.">
                         The document
                         needs to be generally in accordance with the document forming part of the permit application,
                         but with specified changes.</option>
                     <option 
                         value="The document needs to be generally in accordance with another document, but with specified changes."
-                        data-show=".other-doc, .specify-div">The document needs to be generally in
+                        data-show=".other-doc, .specify-div, .document-include-table">The document needs to be generally in
                         accordance with another document, but with specified changes.
                     </option>
                 </select>
@@ -260,7 +260,7 @@
                 <div class="text-danger"></div>
             </div>
 
-            <div class="mb-3">
+            <div class="mb-3 document-include-table d-none">
                 <table class="table table-bordered">
                     <thead>
                         <tr>
@@ -528,7 +528,7 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th colspan="2">Specify other requirements</th>
+                            <th colspan="2">What other requirements must the document include?</th>
                         </tr>
                     </thead>
                     <tbody class="specify-requirements-tbody">
