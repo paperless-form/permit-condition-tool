@@ -3,6 +3,10 @@ $(document).ready(function () {
     $('.search-select').select2({
         placeholder: "Select option"
     });
+    $('.no-search-select').select2({
+        placeholder: "Select option",
+        minimumResultsForSearch: Infinity
+    });
 
     $('.select2-search__field').attr('placeholder', 'Search here');
 });

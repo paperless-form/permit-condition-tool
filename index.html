@@ -27,25 +27,28 @@
             padding: 10px;
             white-space: pre-wrap;
         }
+        
+        table{
+            width: 100%;
+            text-align: center;
+        }
 
-        .editable-area {
-    width: 100%;
-    height: 150px;
-    border: 1px solid #ccc;
-    padding: 10px;
-    font-family: Arial, sans-serif;
-    white-space: pre-wrap; /* Preserve line breaks */
-    overflow-y: auto; /* Add scrollbar if content overflows */
-}
+        .left-allign-td{
+            text-align: left;
+        }
 
-.editable-area[placeholder]:empty::before {
-    content: attr(placeholder);
-    color: #999;
-}
+        table tr{
+            color: white;
+        }
 
-.margin-for-roman{
-    min-width: 4rem;
-}
+        .margin-for-roman{
+            min-width: 4rem;
+        }
+
+        .fa-solid{
+            cursor: pointer;
+        }
+
     </style>
 </head>
 
@@ -215,7 +218,7 @@
                 <div class="d-flex">
                     <div class="checkbox-container"><input type="checkbox" class="prepared-checkbox"></div>
                     <div>
-                        <p class="checkbox-text">be prepared.</p>
+                        <p class="checkbox-text">Insert custom preparation requirement</p>
                     </div>
                 </div>
                 <div class="prepared-checkbox-error text-danger"></div>
@@ -229,7 +232,7 @@
             <div class="search-section mb-3">
                 <label for="">Does the document need to be generally in accordance with another
                     document?</label>
-                <select class="search-select mt-3 document-version" style="width: 100%">
+                <select class="no-search-select  mt-3 document-version" style="width: 100%">
                     <option value="" selected data-hide=".other-doc">Select Option</option>
                     <option data-hide=".other-doc" value="No, it is a new document">No, it
                         is a new document</option>
@@ -258,9 +261,22 @@
             </div>
 
             <div class="mb-3">
-                <label for="">What changes must the plan(s) or document include?</label>
-                <textarea class="limitedTextarea"></textarea>
-                <div class="text-danger"></div>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th colspan="2">What changes must the plan(s) or document include?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td width="90%" contenteditable="true" class="left-allign-td"></td>
+                        <td width="10%"><i class="fa-solid fa-plus text-white bg-success p-1"></i></td>
+                      </tr>
+                    </tbody>
+                </table>
+                <!-- <label for="">What changes must the plan(s) or document include?</label>
+                <textarea class="limitedTextarea"></textarea> -->
+                <div class="table-error text-danger"></div>
             </div>
 
             <div class="landscape-depend d-none">
@@ -269,35 +285,35 @@
                     <div class="checkbox-container"><input type="checkbox" class="document-include-checkbox">
                     </div>
                     <div>
-                        <p class="checkbox-text">Layout of landscaping and planting within all open areas of the subject land</p>
+                        <p class="checkbox-text">layout of landscaping and planting within all open areas of the subject land</p>
                     </div>
                 </div>
                 <div class="d-flex">
                     <div class="checkbox-container"><input type="checkbox" class="document-include-checkbox">
                     </div>
                     <div>
-                        <p class="checkbox-text">A survey (including botanical names) of all existing vegetation to be retained and/or removed</p>
+                        <p class="checkbox-text">a survey (including botanical names) of all existing vegetation to be retained and/or removed</p>
                     </div>
                 </div>
                 <div class="d-flex">
                     <div class="checkbox-container"><input type="checkbox" class="document-include-checkbox">
                     </div>
                     <div>
-                        <p class="checkbox-text">Buildings and trees (including botanical names) on neighbouring properties within three metres of the boundary</p>
+                        <p class="checkbox-text">buildings and trees (including botanical names) on neighbouring properties within three metres of the boundary</p>
                     </div>
                 </div>
                 <div class="d-flex">
                     <div class="checkbox-container"><input type="checkbox" class="document-include-checkbox">
                     </div>
                     <div>
-                        <p class="checkbox-text">Details of surface finishes of pathways and driveways</p>
+                        <p class="checkbox-text">details of surface finishes of pathways and driveways</p>
                     </div>
                 </div>
                 <div class="d-flex">
                     <div class="checkbox-container"><input type="checkbox" class="document-include-checkbox">
                     </div>
                     <div>
-                        <p class="checkbox-text">A planting schedule of all proposed trees, shrubs and ground covers, including botanical names, common names, pot sizes, sizes at maturity, and quantities of each plant</p>
+                        <p class="checkbox-text">a planting schedule of all proposed trees, shrubs and ground covers, including botanical names, common names, pot sizes, sizes at maturity, and quantities of each plant</p>
                     </div>
                 </div>
                 <div class="d-flex">
@@ -311,7 +327,7 @@
                     <div class="checkbox-container"><input type="checkbox" class="document-include-checkbox">
                     </div>
                     <div>
-                        <p class="checkbox-text">Details of how the project responds to water sensitive urban design principles, including how storm water will be mitigated, captured, cleaned and stored for onsite use and the location and type of irrigation systems to be used including the location of any rainwater tanks to be used for irrigation</p>
+                        <p class="checkbox-text">details of how the project responds to water sensitive urban design principles, including how storm water will be mitigated, captured, cleaned and stored for onsite use and the location and type of irrigation systems to be used including the location of any rainwater tanks to be used for irrigation</p>
                     </div>
                 </div>
             </div>
@@ -320,42 +336,42 @@
                     <div class="checkbox-container"><input type="checkbox" class="document-include-checkbox">
                     </div>
                     <div>
-                        <p class="checkbox-text">Anticipated volumes of waste and recycling that will be generated and how they are determined</p>
+                        <p class="checkbox-text">anticipated volumes of waste and recycling that will be generated and how they are determined</p>
                     </div>
                 </div>
                 <div class="d-flex">
                     <div class="checkbox-container"><input type="checkbox" class="document-include-checkbox">
                     </div>
                     <div>
-                        <p class="checkbox-text">The type and number of waste bins</p>
+                        <p class="checkbox-text">the type and number of waste bins</p>
                     </div>
                 </div>
                 <div class="d-flex">
                     <div class="checkbox-container"><input type="checkbox" class="document-include-checkbox">
                     </div>
                     <div>
-                        <p class="checkbox-text">The type and size of trucks required for waste collection</p>
+                        <p class="checkbox-text">the type and size of trucks required for waste collection</p>
                     </div>
                 </div>
                 <div class="d-flex">
                     <div class="checkbox-container"><input type="checkbox" class="document-include-checkbox">
                     </div>
                     <div>
-                        <p class="checkbox-text">A plan detailing adequate areas for waste bin storage and collection for the required type and number of bins</p>
+                        <p class="checkbox-text">a plan detailing adequate areas for waste bin storage and collection for the required type and number of bins</p>
                     </div>
                 </div>
                 <div class="d-flex">
                     <div class="checkbox-container"><input type="checkbox" class="document-include-checkbox">
                     </div>
                     <div>
-                        <p class="checkbox-text">Frequency of waste collection</p>
+                        <p class="checkbox-text">frequency of waste collection</p>
                     </div>
                 </div>
                 <div class="d-flex">
                     <div class="checkbox-container"><input type="checkbox" class="document-include-checkbox">
                     </div>
                     <div>
-                        <p class="checkbox-text">Hours for waste collection</p>
+                        <p class="checkbox-text">hours for waste collection</p>
                     </div>
                 </div>
             </div>
@@ -364,14 +380,14 @@
                     <div class="checkbox-container"><input type="checkbox" class="document-include-checkbox">
                     </div>
                     <div>
-                        <p class="checkbox-text">Measures that must be incorporated into the design and construction of the development to ensure the protection of any trees identified for retention, determined in accordance with Australian Standard AS4970-2009 - Protection of Trees on Development Sites</p>
+                        <p class="checkbox-text">measures that must be incorporated into the design and construction of the development to ensure the protection of any trees identified for retention, determined in accordance with Australian Standard AS4970-2009 - Protection of Trees on Development Sites</p>
                     </div>
                 </div>
                 <div class="d-flex">
                     <div class="checkbox-container"><input type="checkbox" class="document-include-checkbox">
                     </div>
                     <div>
-                        <p class="checkbox-text">The location of tree protection zones (TPZ) and tree protection fencing for trees identified for retention on a plan that is drawn to scale with dimensions</p>
+                        <p class="checkbox-text">the location of tree protection zones (TPZ) and tree protection fencing for trees identified for retention on a plan that is drawn to scale with dimensions</p>
                     </div>
                 </div>
             </div>
@@ -380,22 +396,21 @@
                     <div class="checkbox-container"><input type="checkbox" class="document-include-checkbox">
                     </div>
                     <div>
-                        <p class="checkbox-text">Include details of the proposed stormwater management system, including drainage works and retention, detention and discharges of stormwater to the drainage system
-                        </p>
+                        <p class="checkbox-text">include details of the proposed stormwater management system, including drainage works and retention, detention and discharges of stormwater to the drainage system</p>
                     </div>
                 </div>
                 <div class="d-flex">
                     <div class="checkbox-container"><input type="checkbox" class="document-include-checkbox">
                     </div>
                     <div>
-                        <p class="checkbox-text">Set out how the stormwater management system will be managed on an ongoing basis</p>
+                        <p class="checkbox-text">set out how the stormwater management system will be managed on an ongoing basis</p>
                     </div>
                 </div>
                 <div class="d-flex">
                     <div class="checkbox-container"><input type="checkbox" class="document-include-checkbox">
                     </div>
                     <div>
-                        <p class="checkbox-text">Demonstrate how all relevant standards set out in the planning scheme relating to stormwater management will meet the objectives in the planning scheme, including modelling and calculations</p>
+                        <p class="checkbox-text">demonstrate how all relevant standards set out in the planning scheme relating to stormwater management will meet the objectives in the planning scheme, including modelling and calculations</p>
                     </div>
                 </div>
             </div>
@@ -404,63 +419,63 @@
                     <div class="checkbox-container"><input type="checkbox" class="document-include-checkbox">
                     </div>
                     <div>
-                        <p class="checkbox-text">The means by which the on-site car parking and bicycle parking spaces will be allocated and managed</p>
+                        <p class="checkbox-text">the means by which the on-site car parking and bicycle parking spaces will be allocated and managed</p>
                     </div>
                 </div>
                 <div class="d-flex">
                     <div class="checkbox-container"><input type="checkbox" class="document-include-checkbox">
                     </div>
                     <div>
-                        <p class="checkbox-text">The location of all areas on-and/or off-site to be used for staff and patron parking</p>
+                        <p class="checkbox-text">the location of all areas on-and/or off-site to be used for staff and patron parking</p>
                     </div>
                 </div>
                 <div class="d-flex">
                     <div class="checkbox-container"><input type="checkbox" class="document-include-checkbox">
                     </div>
                     <div>
-                        <p class="checkbox-text">Owner's permission and any required planning permission for parking on other land</p>
+                        <p class="checkbox-text">owner's permission and any required planning permission for parking on other land</p>
                     </div>
                 </div>
                 <div class="d-flex">
                     <div class="checkbox-container"><input type="checkbox" class="document-include-checkbox">
                     </div>
                     <div>
-                        <p class="checkbox-text">Specification of staff numbers adequate to enable efficient operation of car parking areas both on-site and off-site</p>
+                        <p class="checkbox-text">specification of staff numbers adequate to enable efficient operation of car parking areas both on-site and off-site</p>
                     </div>
                 </div>
                 <div class="d-flex">
                     <div class="checkbox-container"><input type="checkbox" class="document-include-checkbox">
                     </div>
                     <div>
-                        <p class="checkbox-text">The number and location of all on- and off- site security staff</p>
+                        <p class="checkbox-text">the number and location of all on- and off- site security staff</p>
                     </div>
                 </div>
                 <div class="d-flex">
                     <div class="checkbox-container"><input type="checkbox" class="document-include-checkbox">
                     </div>
                     <div>
-                        <p class="checkbox-text">The means by which the direction of traffic and pedestrian flows to and from car parking areas will be controlled both on- and off-site</p>
+                        <p class="checkbox-text">the means by which the direction of traffic and pedestrian flows to and from car parking areas will be controlled both on- and off-site</p>
                     </div>
                 </div>
                 <div class="d-flex">
                     <div class="checkbox-container"><input type="checkbox" class="document-include-checkbox">
                     </div>
                     <div>
-                        <p class="checkbox-text">Measures to discourage patron car parking in (specify location)</p>
+                        <p class="checkbox-text">measures to discourage patron car parking in (specify location)</p>
                     </div>
                 </div>
                 <div class="d-flex">
                     <div class="checkbox-container"><input type="checkbox" class="document-include-checkbox">
                     </div>
                     <div>
-                        <p class="checkbox-text">Measures to preclude staff parking in designated patron car parking areas</p>
+                        <p class="checkbox-text">measures to preclude staff parking in designated patron car parking areas</p>
                     </div>
                 </div>
                 <div class="d-flex">
                     <div class="checkbox-container"><input type="checkbox" class="document-include-checkbox">
                     </div>
                     <div>
-                        <p class="checkbox-text">Staffing and other measures to ensure the orderly departure and arrival of patrons especially</p>
+                        <p class="checkbox-text">staffing and other measures to ensure the orderly departure and arrival of patrons especially</p>
                     </div>
                 </div>
             </div>
@@ -469,47 +484,42 @@
                     <div class="checkbox-container"><input type="checkbox" class="document-include-checkbox">
                     </div>
                     <div>
-                        <p class="checkbox-text">Staffing and other measures which are designed to ensure the orderly arrival and departure of patrons</p>
+                        <p class="checkbox-text">staffing and other measures which are designed to ensure the orderly arrival and departure of patrons</p>
                     </div>
                 </div>
                 <div class="d-flex">
                     <div class="checkbox-container"><input type="checkbox" class="document-include-checkbox">
                     </div>
                     <div>
-                        <p class="checkbox-text">Signage to be used to encourage responsible off-site patron behaviour
-                        </p>
+                        <p class="checkbox-text">signage to be used to encourage responsible off-site patron behaviour</p>
                     </div>
                 </div>
                 <div class="d-flex">
                     <div class="checkbox-container"><input type="checkbox" class="document-include-checkbox">
                     </div>
                     <div>
-                        <p class="checkbox-text">The training of staff in the management of patron behaviour
-                        </p>
+                        <p class="checkbox-text">the training of staff in the management of patron behaviour</p>
                     </div>
                 </div>
                 <div class="d-flex">
                     <div class="checkbox-container"><input type="checkbox" class="document-include-checkbox">
                     </div>
                     <div>
-                        <p class="checkbox-text">Staff communication arrangements
-                        </p>
+                        <p class="checkbox-text">staff communication arrangements</p>
                     </div>
                 </div>
                 <div class="d-flex">
                     <div class="checkbox-container"><input type="checkbox" class="document-include-checkbox">
                     </div>
                     <div>
-                        <p class="checkbox-text">Measures to control noise emissions from the premises
-                        </p>
+                        <p class="checkbox-text">measures to control noise emissions from the premises</p>
                     </div>
                 </div>
                 <div class="d-flex">
                     <div class="checkbox-container"><input type="checkbox" class="document-include-checkbox">
                     </div>
                     <div>
-                        <p class="checkbox-text">Complaint handling process to effectively manage any complaints received. This must include a Complaints Register to be kept at the premises which records details of the complaint received, any action taken and the response provided to the complainant
-                        </p>
+                        <p class="checkbox-text">complaint handling process to effectively manage any complaints received. This must include a Complaints Register to be kept at the premises which records details of the complaint received, any action taken and the response provided to the complainant</p>
                     </div>
                 </div>
             </div>
@@ -521,7 +531,7 @@
 
             <div class="search-section mb-3">
                 <label for="">Do you want to allow the requirements to be modified with the written consent of the responsible authority?</label>
-                <select class="search-select mt-3 allow-modify-requirements" style="width: 100%">
+                <select class="no-search-select mt-3 allow-modify-requirements" style="width: 100%">
                     <option value="" selected disabled>Select Option</option>
                     <option value="Yes">Yes</option>
                     <option value="No">No</option>
@@ -531,7 +541,7 @@
 
             <div class="search-section mb-3">
                 <label for="">Does the plan or document require works or other things to be done within a specified time?</label>
-                <select class="search-select mt-3 other-things-to-be-done" style="width: 100%">
+                <select class="no-search-select mt-3 other-things-to-be-done" style="width: 100%">
                     <option value="" selected disabled data-hide=".things-to-be-done">Select Option</option>
                     <option value="Yes" data-show=".things-to-be-done">Yes</option>
                     <option value="No" data-hide=".things-to-be-done">No</option>
@@ -546,7 +556,7 @@
 
             <div class="search-section mb-3 things-to-be-done d-none">
                 <label for="">When must the works or other requirements be completed by?</label>
-                <select class="search-select mt-3 other-works-complete-by" style="width: 100%">
+                <select class="no-search-select mt-3 other-works-complete-by" style="width: 100%">
                     <option value=""
                         data-hide=".event-complete-section, .issued-complete-time-section, .specified-complete-date-section"
                         selected>
@@ -625,7 +635,7 @@
             <div class="search-section mb-3">
                 <label for="">Does the plan or document contain requirements for a use to be operated in a particular
                     manner?</label>
-                <select class="search-select mt-3 document-contain-requirements" style="width: 100%">
+                <select class="no-search-select mt-3 document-contain-requirements" style="width: 100%">
                     <option value="" selected disabled>Select Option</option>
                     <option value="Yes">Yes</option>
                     <option value="No">No</option>
@@ -639,7 +649,7 @@
         <div class="condition-2 d-none mt-3">
             <div class="search-section mb-3">
                 <label for="">What aspect of the use’s operation is the condition regulating?</label>
-                <select class="search-select mt-3 component-select" style="width: 100%">
+                <select class="no-search-select mt-3 component-select" style="width: 100%">
                     <option data-hide=".specific-aspect" value="" disabled selected>Select Option</option>
                     <option data-hide=".specific-aspect" value="component 1">A condition regulating the general hours of operation for the
                         approved use.</option>
@@ -741,7 +751,7 @@
             <div class="search-section mb-3">
                 <label for="">Are there activities of the use that may operate outside of these
                     hours?</label>
-                <select class="search-select mt-3 activities-outside-hours" style="width: 100%">
+                <select class="no-search-select mt-3 activities-outside-hours" style="width: 100%">
                     <option value="" data-hide=".exempt-activities" disabled selected>Select Option</option>
                     <option value="Yes" data-show=".exempt-activities">Yes</option>
                     <option value="No" data-hide=".exempt-activities">No</option>
@@ -757,7 +767,7 @@
             <div class="search-section mb-3">
                 <label for="">Can the hours be varied with the written consent of the responsible
                     authority?</label>
-                <select class="search-select mt-3 responsible-authority-consent" style="width: 100%">
+                <select class="no-search-select mt-3 responsible-authority-consent" style="width: 100%">
                     <option value="" disabled selected>Select Option</option>
                     <option value="Yes">Yes</option>
                     <option value="No">No</option>
@@ -797,6 +807,7 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://kit.fontawesome.com/786d0bd98a.js" crossorigin="anonymous"></script>
     <!-- Custom JS -->
     <script src="script.js"></script>
 
@@ -810,7 +821,7 @@
             time_24hr: false
         });
 
-        var lines = ''
+        var lines = []
         $(document).ready(function () {
             $('.datepicker').datepicker({
                 format: 'dd/mm/yyyy',
@@ -842,9 +853,9 @@
         $(document).on('change', '.prepared-checkbox', function () {
 
 
-            if ($(this).is(':checked') && $(this).closest('div').parent('div').find('p').text() == "be prepared.") {
+            if ($(this).is(':checked') && $(this).closest('div').parent('div').find('p').text() == "Insert custom preparation requirement") {
                 $('.prepared-section').removeClass('d-none');
-            } else if ($(this).closest('div').parent('div').find('p').text() == "be prepared."){
+            } else if ($(this).closest('div').parent('div').find('p').text() == "Insert custom preparation requirement"){
                 $('.prepared-section').addClass('d-none');
             }
         });
@@ -857,11 +868,34 @@
                 $(this).closest('div.row').find('.time-div').addClass('d-none');
             }
         });
+
+        $(document).on('click','.fa-trash',function(){
+            $(this).closest('tr').remove();
+            lines = []
+            $('table tbody tr:visible').each(function(){
+                lines.push($(this).find('td:first').text().trim());
+            });
+        })
+
+        $(document).on('click','.fa-plus',function(){
+            var table = $(this).closest('table');
+            var tbody = table.find('tbody');
+            var tr = tbody.find('tr').length
+            if(tr <= 19){
+                tbody.find('.fa-plus').addClass('fa-trash bg-danger')
+                tbody.find('.fa-plus').removeClass('fa-plus bg-success')
+                tbody.append(`<tr>
+                    <td width="90%" contenteditable="true" class="left-allign-td"></td>
+                    <td width="10%"><i class="fa-solid fa-plus text-white bg-success p-1"></i></td>
+                </tr>`)
+            }
+        })
+
         function validate() {
             var valid = true;
             $('.text-danger').empty();
             // Validate select fields
-            $('.search-select:visible').each(function () {
+            $('select:visible').each(function () {
                 var $select = $(this);
                 var $errorDiv = $select.closest('div').find('.text-danger');
                 if (!$select.val()) {
@@ -893,6 +927,13 @@
             $('.limitedTextarea:visible').each(function () {
                 if ($(this).val().trim() == '') {
                     $(this).closest('div').find('.text-danger').html('<p>This field is required</p>');
+                    valid = false;
+                }
+            });
+
+            $('table tbody tr:visible').each(function(){
+                if($(this).find('td:first').text().trim() == ''){
+                    $('.table-error').html('<p>Please fill all the fields in the table</p>');
                     valid = false;
                 }
             });
@@ -929,9 +970,12 @@
         }
 
         function texareaContent() {
-            $('.checkbox-section').removeClass('d-none')
+            $('.checkbox-section').removeClass('d-none') 
             var content = ''
-            lines = $('.limitedTextarea').val().split("\n");
+            lines = []
+            $('table tbody tr:visible').each(function(){
+                lines.push($(this).find('td:first').text().trim());
+            });
             if($('.table-1').is(':checked')){
                 var document_title = $('.document-title').find(":selected").text(),
                     document_desc = $('.document-title').find(":selected").val(),
@@ -998,7 +1042,7 @@
 
                 var i = 0;
                 $('.prepared-checkbox:checked').each(function(){
-                    if($(this).closest('div').parent('div').find('p').text() == "be prepared."){
+                    if($(this).closest('div').parent('div').find('p').text() == "Insert custom preparation requirement"){
                         content += `<div>&emsp;${alphabet[count]}) ${$('.document-prepared-other-requirements').val()} </div>\n`
                         count++
                     }
@@ -1008,12 +1052,14 @@
                     }
                     i++
                 })
-                
-                content += `<div>&emsp;${alphabet[count]}) ${document_version}, but modified to show:</div>\n`
-                count++
-                for (var i = 0; i < lines.length; i++) {
-                    content += `<div style="display: flex;align-items: baseline;"><div style="white-space: pre;" class="margin-for-roman">&emsp;&emsp;${toRoman(i + 1)}.</div><div style="margin-left: 10px;"> ${lines[i]}</div></div>\n` //roman number
+                if(document_version !== "No, it is a new document"){
+                    content += `<div>&emsp;${alphabet[count]}) ${document_version}, but modified to show:</div>\n`
+                    count++
+                    for (var i = 0; i < lines.length; i++) {
+                        content += `<div style="display: flex;align-items: baseline;"><div style="white-space: pre;" class="margin-for-roman">&emsp;&emsp;${toRoman(i + 1)}.</div><div style="margin-left: 10px;"> ${lines[i]}</div></div>\n` //roman number
+                    }
                 }
+                
 
                 document_include.length != 0 ? content += `<div>&emsp;${alphabet[count]}) Include following details:</div>\n` : $('.specify-requirements').val().trim() != '' ? content += `<div>&emsp;${alphabet[count]}) Include following details:</div>\n` : ''
                 count++
@@ -1113,6 +1159,11 @@
             $('.condition-2').addClass('d-none')
             $('.time-checkbox').prop('checked', false)
             $('.limitedTextarea, .specify-requirements').val('')
+            $('table tbody').empty()
+            $('table tbody').append(`<tr>
+                <td width="90%" contenteditable="true" class="left-allign-td"></td>
+                <td width="10%"><i class="fa-solid fa-plus text-white bg-success p-1"></i></td>
+            </tr>`)
         })
 
 
