@@ -1189,8 +1189,12 @@
             $('.condition-2').addClass('d-none')
             $('.time-checkbox').prop('checked', false)
             $('.limitedTextarea, .specify-requirements').val('')
-            $('.document-include-tbody').empty()
+            $('.document-include-tbody, .specify-requirements-tbody').empty()
             $('.document-include-tbody').append(`<tr>
+                <td width="90%" contenteditable="true" class="left-allign-td"></td>
+                <td width="10%"><i class="fa-solid fa-plus text-white bg-success p-1"></i></td>
+            </tr>`)
+            $('.specify-requirements-tbody').append(`<tr>
                 <td width="90%" contenteditable="true" class="left-allign-td"></td>
                 <td width="10%"><i class="fa-solid fa-plus text-white bg-success p-1"></i></td>
             </tr>`)
