@@ -225,7 +225,7 @@
             </div>
             <div class="prepared-section d-none mb-3">
                 <label for="">Preparation – Custom Other Requirements</label>
-                <input type="text" class="form-control document-prepared-other-requirements">
+                <input type="text" class="form-control document-prepared-other-requirements not-required">
                 <div class="text-danger"></div>
             </div>
 
@@ -233,22 +233,22 @@
                 <label for="">Does the document need to be generally in accordance with another
                     document?</label>
                 <select class="no-search-select  mt-3 document-version" style="width: 100%">
-                    <option value="" selected data-hide=".other-doc">Select Option</option>
-                    <option data-hide=".other-doc" value="No, it is a new document">No, it
+                    <option value="" selected data-hide=".other-doc, .specify-div">Select Option</option>
+                    <option data-hide=".other-doc, .specify-div" value="No, it is a new document">No, it
                         is a new document</option>
-                    <option data-hide=".other-doc"
+                    <option data-hide=".other-doc, .specify-div"
                         value="The document needs to be generally in accordance with the document forming part of the permit application.">
                         The document needs to be generally in
                         accordance with the document forming part of the permit application.
                     </option>
-                    <option data-hide=".other-doc"
+                    <option data-hide=".other-doc" data-show=".specify-div" 
                         value="The document needs to be generally in accordance with the document forming part of the permit application, but with specified changes.">
                         The document
                         needs to be generally in accordance with the document forming part of the permit application,
                         but with specified changes.</option>
-                    <option
+                    <option 
                         value="The document needs to be generally in accordance with another document, but with specified changes."
-                        data-show=".other-doc">The document needs to be generally in
+                        data-show=".other-doc, .specify-div">The document needs to be generally in
                         accordance with another document, but with specified changes.
                     </option>
                 </select>
@@ -267,7 +267,7 @@
                             <th colspan="2">What changes must the plan(s) or document include?</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="document-include-tbody">
                       <tr>
                         <td width="90%" contenteditable="true" class="left-allign-td"></td>
                         <td width="10%"><i class="fa-solid fa-plus text-white bg-success p-1"></i></td>
@@ -276,7 +276,7 @@
                 </table>
                 <!-- <label for="">What changes must the plan(s) or document include?</label>
                 <textarea class="limitedTextarea"></textarea> -->
-                <div class="table-error text-danger"></div>
+                <div class="document-table-error text-danger"></div>
             </div>
 
             <div class="landscape-depend d-none">
@@ -523,11 +523,30 @@
                     </div>
                 </div>
             </div>
-            <div class="mb-3">
+
+            <div class="mb-3 specify-div d-none">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th colspan="2">Specify other requirements</th>
+                        </tr>
+                    </thead>
+                    <tbody class="specify-requirements-tbody">
+                      <tr>
+                        <td width="90%" contenteditable="true" class="left-allign-td"></td>
+                        <td width="10%"><i class="fa-solid fa-plus text-white bg-success p-1"></i></td>
+                      </tr>
+                    </tbody>
+                </table>
+                <!-- <label for="">What changes must the plan(s) or document include?</label>
+                <textarea class="limitedTextarea"></textarea> -->
+                <div class="table-error text-danger"></div>
+            </div>
+            <!-- <div class="mb-3">
                 <label for="">Specify other requirements</label>
                 <textarea class="specify-requirements"></textarea>
                 <div class="text-danger"></div>
-            </div>
+            </div> -->
 
             <div class="search-section mb-3">
                 <label for="">Do you want to allow the requirements to be modified with the written consent of the responsible authority?</label>
@@ -821,7 +840,7 @@
             time_24hr: false
         });
 
-        var lines = []
+        var lines = [], specify_lines = []
         $(document).ready(function () {
             $('.datepicker').datepicker({
                 format: 'dd/mm/yyyy',
@@ -839,14 +858,6 @@
             } else if ($('.table-2').is(':checked')) {
                 $('.condition-2').removeClass('d-none');
                 $('.condition-1').addClass('d-none');
-            }
-        });
-
-        $(document).on('keydown', '.limitedTextarea', function (event) {
-            lines = $(this).val().split("\n");
-            // Prevent adding more than 20 lines
-            if (lines.length >= 20 && event.key === "Enter") {
-                event.preventDefault();
             }
         });
 
@@ -871,10 +882,6 @@
 
         $(document).on('click','.fa-trash',function(){
             $(this).closest('tr').remove();
-            lines = []
-            $('table tbody tr:visible').each(function(){
-                lines.push($(this).find('td:first').text().trim());
-            });
         })
 
         $(document).on('click','.fa-plus',function(){
@@ -906,11 +913,13 @@
 
             // Validate input fields
             $('.form-control:visible').each(function () {
-                var $input = $(this);
-                var $errorDiv = $input.closest('div').find('.text-danger');
-                if (!$input.val().trim()) {
-                    $errorDiv.html('<p>This field is required</p>');
-                    valid = false;
+                if(!$(this).hasClass('not-required')){
+                    var $input = $(this);
+                    var $errorDiv = $input.closest('div').find('.text-danger');
+                    if (!$input.val().trim()) {
+                        $errorDiv.html('<p>This field is required</p>');
+                        valid = false;
+                    }
                 }
             });
 
@@ -931,7 +940,14 @@
                 }
             });
 
-            $('table tbody tr:visible').each(function(){
+            $('.document-include-tbody tr:visible').each(function(){
+                if($(this).find('td:first').text().trim() == ''){
+                    $('.document-table-error').html('<p>Please fill all the fields in the table</p>');
+                    valid = false;
+                }
+            });
+
+            $('.specify-requirements-tbody tr:visible').each(function(){
                 if($(this).find('td:first').text().trim() == ''){
                     $('.table-error').html('<p>Please fill all the fields in the table</p>');
                     valid = false;
@@ -972,9 +988,13 @@
         function texareaContent() {
             $('.checkbox-section').removeClass('d-none') 
             var content = ''
-            lines = []
-            $('table tbody tr:visible').each(function(){
+            lines = [] 
+            specify_lines = []
+            $('.document-include-tbody tr:visible').each(function(){
                 lines.push($(this).find('td:first').text().trim());
+            });
+            $('.specify-requirements-tbody tr:visible').each(function(){
+                specify_lines.push($(this).find('td:first').text().trim());
             });
             if($('.table-1').is(':checked')){
                 var document_title = $('.document-title').find(":selected").text(),
@@ -1031,10 +1051,10 @@
                 }
 
                 if (document_version == "The document needs to be generally in accordance with the document forming part of the permit application." || document_version == "The document needs to be generally in accordance with the document forming part of the permit application, but with specified changes.") {
-                    document_version = "be generally in accordance with the " + document_title + " forming part of the application."
+                    document_version = "be generally in accordance with the " + document_title + " forming part of the application"
                 }
                 else if (document_version == "The document needs to be generally in accordance with another document, but with specified changes.") {
-                    document_version = "be generally in accordance with the " + $('.document-version-other-doc').val() + " forming part of the application."
+                    document_version = "be generally in accordance with the " + $('.document-version-other-doc').val() + " forming part of the application"
                 }
 
                 content += `<div><b>${document_title}</b></div>\n\n`
@@ -1042,11 +1062,11 @@
 
                 var i = 0;
                 $('.prepared-checkbox:checked').each(function(){
-                    if($(this).closest('div').parent('div').find('p').text() == "Insert custom preparation requirement"){
+                    if($(this).closest('div').parent('div').find('p').text() == "Insert custom preparation requirement" && $('.document-prepared-other-requirements').val().trim() != ''){
                         content += `<div>&emsp;${alphabet[count]}) ${$('.document-prepared-other-requirements').val()} </div>\n`
                         count++
                     }
-                    else{
+                    else if($(this).closest('div').parent('div').find('p').text() != "Insert custom preparation requirement"){
                         content += `<div>&emsp;${alphabet[count]}) ${$(this).closest('div').parent('div').find('p').text()}</div>\n`
                         count++
                     }
@@ -1061,21 +1081,31 @@
                 }
                 
 
-                document_include.length != 0 ? content += `<div>&emsp;${alphabet[count]}) Include following details:</div>\n` : $('.specify-requirements').val().trim() != '' ? content += `<div>&emsp;${alphabet[count]}) Include following details:</div>\n` : ''
+                document_include.length != 0 ? content += `<div>&emsp;${alphabet[count]}) Include following details:</div>\n` : specify_lines.length != 0 ? content += `<div>&emsp;${alphabet[count]}) Include following details:</div>\n` : ''
                 count++
                 for (var i = 0; i < document_include.length; i++) {
                     content += `<div style="display: flex;align-items: baseline;"><div style="white-space: pre;" class="margin-for-roman">&emsp;&emsp;${toRoman(i + 1)}.</div><div style="margin-left: 10px;"> ${document_include[i]}</div></div>\n`
                 }
-                if($('.specify-requirements').val().trim() != ''){
-                    var specify_requirements = $('.specify-requirements').val().split("\n")
-                    
-                    var roman_number = document_include.length
 
-                    for(var i = 0; i < specify_requirements.length; i++){
-                        content += `<div style="display: flex;align-items: baseline;"><div style="white-space: pre;" class="margin-for-roman">&emsp;&emsp;${toRoman(roman_number+1)}.</div><div style="margin-left: 10px;"> ${specify_requirements[i]}</div></div>\n`
+                if($('.specify-requirements-tbody tr:visible').length > 0){
+                    var roman_number = document_include.length
+                    for(var i = 0; i < specify_lines.length; i++){
+                        content += `<div style="display: flex;align-items: baseline;"><div style="white-space: pre;" class="margin-for-roman">&emsp;&emsp;${toRoman(roman_number + 1)}.</div><div style="margin-left: 10px;"> ${specify_lines[i]}</div></div>\n`
                         roman_number++
                     }
                 }
+
+                // if($('.specify-requirements').val().trim() != ''){
+                //     var specify_requirements = $('.specify-requirements').val().split("\n")
+                    
+                //     var roman_number = document_include.length
+
+                //     for(var i = 0; i < specify_requirements.length; i++){
+                //         content += `<div style="display: flex;align-items: baseline;"><div style="white-space: pre;" class="margin-for-roman">&emsp;&emsp;${toRoman(roman_number+1)}.</div><div style="margin-left: 10px;"> ${specify_requirements[i]}</div></div>\n`
+                //         roman_number++
+                //     }
+                // }
+
                 if(allow_modify_requirements == "Yes") {
                     content += `<div>The responsible authority may consent in writing to vary any of these requirements.</div>\n`
                 }
@@ -1159,8 +1189,8 @@
             $('.condition-2').addClass('d-none')
             $('.time-checkbox').prop('checked', false)
             $('.limitedTextarea, .specify-requirements').val('')
-            $('table tbody').empty()
-            $('table tbody').append(`<tr>
+            $('.document-include-tbody').empty()
+            $('.document-include-tbody').append(`<tr>
                 <td width="90%" contenteditable="true" class="left-allign-td"></td>
                 <td width="10%"><i class="fa-solid fa-plus text-white bg-success p-1"></i></td>
             </tr>`)
